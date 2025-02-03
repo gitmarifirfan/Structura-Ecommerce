@@ -13,4 +13,11 @@ class categories extends Model
         'category_id',
         'category_name',
     ];
+
+    public function category()
+{
+    return $this->belongsTo(categories::class, 'category_id');
 }
+
+}
+
