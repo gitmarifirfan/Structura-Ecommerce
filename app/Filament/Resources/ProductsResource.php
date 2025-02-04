@@ -43,16 +43,19 @@ class ProductsResource extends Resource
                     ->label('Product Description')
                     ->required(),
                 TextInput::make('price')
-                    ->numeric()
                     ->columnSpan(2)
+                    ->numeric()
                     ->label('Product Price')
+                    ->required(),
+                TextInput::make('qty')
+                    ->numeric()
+                    ->label('Product quantity')
                     ->required(),
                 Select::make('category_id')
                     ->label('Category')
                     ->options(categories::all()->pluck('category_name', 'id'))
                     ->searchable()
-                    ->required()
-                    ->columnSpan(2),
+                    ->required(),
             ]);
     }
 
