@@ -13,8 +13,7 @@ class ListProducts extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
-            Actions\ViewAction::make(),
+            Actions\CreateAction::make(),
         ];
     }
 }
