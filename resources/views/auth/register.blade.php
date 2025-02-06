@@ -23,9 +23,9 @@
 
             <!-- Username -->
             <div class="mb-4">
-                <label for="username" class="block text-gray-700 font-medium">Username:</label>
-                <input type="text" name="username" id="username" required class="w-full p-2 border border-gray-300 rounded-lg">
-                @error('username')
+                <label for="name" class="block text-gray-700 font-medium">Username:</label>
+                <input type="text" name="name" id="name" required class="w-full p-2 border border-gray-300 rounded-lg">
+                @error('name')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>

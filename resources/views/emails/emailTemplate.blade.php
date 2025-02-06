@@ -25,7 +25,7 @@
                     <!-- Content -->
                     <tr>
                         <td style="color: #4b5563; font-size: 16px;">
-                            <p>Halo, <strong>{{ $user->username }}</strong> 👋</p>
+                            <p>Halo, <strong>{{ $user->name }}</strong> 👋</p>
                             <p>Terima kasih telah mendaftar di Structura!</p>
                             <p>Klik tombol di bawah ini untuk memverifikasi akun Anda.</p>
                         </td>
