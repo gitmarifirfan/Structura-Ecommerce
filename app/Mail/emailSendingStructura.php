@@ -15,12 +15,16 @@ class emailSendingStructura extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $user;
+    public $verificationUrl;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($user, $verificationUrl)
     {
-        //
+        $this->user = $user;
+        $this->verificationUrl = $verificationUrl;
     }
 
     /**
@@ -30,8 +34,8 @@ class emailSendingStructura extends Mailable
     {
         return new Envelope(
             // use real email from database?
-            from: new Address('Structura@gmail.com', 'admin structura'),
-            subject: 'test Sending email Structura',
+            from: new Address('noreply@demomailtrap.com', 'Structura'),
+            subject: 'Sending Email From Structura',
         );
     }
 
@@ -41,7 +45,7 @@ class emailSendingStructura extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.test-email',
+            view: 'emails.emailTemplate',
         );
     }
 
