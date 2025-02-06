@@ -1,7 +1,7 @@
 
 <div>
     <!-- Top Bar -->
-    <div class="bg-darkblue text-white text-sm py-2 px-8 flex justify-between items-center w-full laptop:w-[1280px] ">
+    <div class="bg-darkblue text-white text-sm py-2 px-8 flex justify-between items-center w-full laptop:w-[1280px]  ">
         <div class="relative">
             <img src="{{ asset('images/icons/Call.png') }}" alt="phone-icon"
                 class="absolute left-2 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500">
@@ -24,7 +24,7 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="bg-white shadow px-6 py-4 w-full laptop:w-[1280px] >
+    <nav class="bg-white shadow px-6 py-4 w-full laptop:w-[1280px]">
         <div class="flex justify-between items-center max-w-7xl mx-auto">
             <!-- Logo -->
             <div class="text-[32px] font-extrabold font-Changa text-darkblue">
