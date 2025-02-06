@@ -17,11 +17,11 @@
     rel="stylesheet">
 <title>Structura Toko Terbaik</title>
 @vite('resources/css/app.css')
-<style>
+{{-- <style>
     * {
         border: solid 1px red
     }
-</style>
+</style> --}}
 
 </head>
 
