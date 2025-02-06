@@ -1,8 +1,9 @@
 {
+    "type": "module",
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build "
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
@@ -12,7 +13,6 @@
         "postcss": "^8.5.1",
         "postcss-nesting": "^12.0.1",
         "tailwindcss": "^3.4.17",
-        "vite": "^4.0.0",
-        "type": "module"
+        "vite": "^4.0.0"
     }
 }
