@@ -15,12 +15,17 @@ export default {
                 smoothcream: '#F5EFE7',
             },
             screens: {
-                'miniphone': { 'min': '1px', 'max': '399px' },
-                'phone': { 'min': '0px', 'max': '639px' },
-                'tablet': { 'min': '640px', 'max': '1023px' },
-                'laptop': { 'min': '1024px', 'max': '1279px' },
-                'desktop': { 'min': '1280px' },
+                'miniphone': { 'min': '1px', 'max': '319px' },  // Feature phones, very small screens
+                'phone-sm': { 'min': '320px', 'max': '479px' }, // Small smartphones (iPhone SE, old Android)
+                'phone': { 'min': '480px', 'max': '639px' }, // Regular smartphones
+                'tablet-sm': { 'min': '640px', 'max': '767px' }, // Small tablets (iPad Mini, Galaxy Tab Mini)
+                'tablet': { 'min': '768px', 'max': '1023px' }, // Standard tablets
+                'laptop-sm': { 'min': '1024px', 'max': '1279px' }, // Small laptops (MacBook Air, basic ultrabooks)
+                'laptop': { 'min': '1280px', 'max': '1535px' }, // Regular laptops
+                'desktop': { 'min': '1536px', 'max': '1919px' }, // Large desktops & monitors
+                'ultrawide': { 'min': '1920px' }, // Ultra-wide monitors, 4K screens
             },
+
         },
     },
     content: [
