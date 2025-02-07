@@ -1,5 +1,4 @@
-
-<div>
+<div clas>
     <!-- Top Bar -->
     <div class="bg-darkblue text-white text-sm py-2 px-8 flex justify-between items-center w-full laptop:w-[1280px]  ">
         <div class="relative">
@@ -22,9 +21,10 @@
             </a>
         </div>
     </div>
-
+</div>
+<div class="sticky top-0 z-50">
     <!-- Navbar -->
-    <nav class="bg-white shadow px-6 py-4 w-full laptop:w-[1280px]">
+    <nav class="bg-white px-6 py-4 w-full laptop:w-[1280px]">
         <div class="flex justify-between items-center max-w-7xl mx-auto">
             <!-- Logo -->
             <div class="text-[32px] font-extrabold font-Changa text-darkblue">
