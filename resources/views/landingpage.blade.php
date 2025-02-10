@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<head>
-<html lang="en">
 
-<meta charset="UTF-8">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-    href="https://fonts.googleapis.com/css2?family=Changa:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
-<title>Structura Toko Terbaik</title>
-@vite('resources/css/app.css')
-{{-- <style>
-    * {
-        border: solid 1px red
-    }
-</style> --}}
+<head>
+    <html lang="en">
+
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Changa:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <title>Structura Toko Terbaik</title>
+    @vite('resources/css/app.css')
+    {{-- <style>
+        * {
+            border: solid 1px red
+        }
+    </style> --}}
 
 </head>
 
@@ -105,28 +106,25 @@
     </div>
     {{--  --}}
     <div
-        class="mt-8 mb-16 mx-auto bg-darkblue h-[200px] w-full md:w-[1280px] relative bg-cover bg-center rounded-[10px]">
-        {{-- image --}}
-        <div class="absolute left-0 h-full w-[600px] bg-gray-500 rounded-l-[10px] flex items-center justify-center">
+        class="mt-8 mb-16 mx-auto bg-darkblue h-[200px] w-full md:w-[1280px] relative bg-cover bg-center rounded-[10px] flex overflow-hidden">
+        {{-- Image Section --}}
+        <div class="w-1/2 bg-gray-500 flex items-center justify-center rounded-l-[10px]">
             <img src="{{ asset('images/landingpages/exploremore.png') }}" alt="Material Konstruksi"
-                class="w-[550px] h-[160px] object-cover">
+                class="w-[90%] max-w-[700px] h-[160px] object-cover">
         </div>
-        {{-- inside content --}}
-        <div
-            class="absolute inset-0 flex flex-col items-end justify-center text-white text-xl md:text-2xl font-bold px-4 w-full">
-            <div class="w-1/2 ml-auto mr-6 text-right">
-                <p class=" font-medium ">EXPLORE MORE AND MORE</p>
-                <div class="leading-none">
-                    <p class=" ml-[280px] text-left text-[12px] font-thin">Temukan lebih banyak produk berkualitas
-                        untuk proyek</p>
-                    <p class="w-1/2 ml-[280px] text-left text-[12px] font-thin">konstruksi Anda di sini.</p>
-                </div>
-                <button class="mt-4 mr-[110px] px-10 py-2 bg-white text-darkblue font-semibold rounded-[10px] text-[16px]" >
-                    Belanja Sekarang !
-                </button>
-            </div>
+
+        {{-- Content Section --}}
+        <div class="w-1/2 flex flex-col justify-center text-white px-6 md:px-12">
+            <h2 class="text-xl md:text-2xl font-bold">EXPLORE MORE AND MORE</h2>
+            <p class="text-sm md:text-base font-light mt-1">
+                Temukan lebih banyak produk berkualitas untuk proyek konstruksi Anda di sini.
+            </p>
+            <button class="mt-4 px-6 py-2 bg-white text-darkblue font-semibold rounded-[10px] text-sm md:text-base w-1/2">
+                Belanja Sekarang!
+            </button>
         </div>
     </div>
+
 
 </body>
 

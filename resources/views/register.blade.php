@@ -28,11 +28,11 @@
     <x-navbar></x-navbar>
 
     <section>
-        <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
+        <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4 text-darkblue">
             <div class="grid md:grid-cols-2 items-center gap-10 max-w-6xl w-full">
                 <div>
                     <h2 class="lg:text-5xl text-4xl font-extrabold lg:leading-[55px] text-gray-800 animate-popUpOut">
-                        Nexus Registration for Start The Courses
+                        Halo, Selamat Datang Di Structura !
                     </h2>
                     <p class="text-sm mt-6 text-gray-800 animate-popUpOut">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate accusamus quia commodi odit?
@@ -51,22 +51,22 @@
                     <div class="space-y-4">
                         <div class="animate-popUpOut">
                             <input name="username" type="text" required
-                                class="bg-gray-100 w-full text-sm text-gray-800 px-4 py-3.5 rounded-md outline-silver-text-custom focus:bg-transparent"
+                                class="bg-[#F3F4F6] w-full text-sm text-gray-800 px-4 py-3.5 rounded-md outline-silver-text-custom focus:bg-transparent border-none"
                                 placeholder="Username" />
                         </div>
                         <div class="animate-popUpOut">
                             <input name="email" type="email" autocomplete="email" required
-                                class="bg-gray-100 w-full text-sm text-gray-800 px-4 py-3.5 rounded-md outline-silver-text-custom focus:bg-transparent"
+                                class="bg-[#F3F4F6] w-full text-sm text-gray-800 px-4 py-3.5 rounded-md outline-silver-text-custom focus:bg-transparent border-none"
                                 placeholder="Email address" />
                         </div>
                         <div class="animate-popUpOut">
                             <input name="password" type="password" autocomplete="new-password" required
-                                class="bg-gray-100 w-full text-sm text-gray-800 px-4 py-3.5 rounded-md outline-silver-text-custom focus:bg-transparent"
+                                class="bg-[#F3F4F6] w-full text-sm text-gray-800 px-4 py-3.5 rounded-md outline-silver-text-custom focus:bg-transparent border-none"
                                 placeholder="Password" />
                         </div>
                         <div class="animate-popUpOut">
                             <input name="confirm-password" type="password" autocomplete="new-password" required
-                                class="bg-gray-100 w-full text-sm text-gray-800 px-4 py-3.5 rounded-md outline-silver-text-custom focus:bg-transparent"
+                                class="bg-[#F3F4F6] w-full text-sm text-gray-800 px-4 py-3.5 rounded-md outline-silver-text-custom focus:bg-transparent border-none"
                                 placeholder="Confirm Password" />
                         </div>
                     </div>
