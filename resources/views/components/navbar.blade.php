@@ -27,9 +27,11 @@
     <nav class="bg-white px-6 py-4 w-full laptop:w-[1280px]">
         <div class="flex justify-between items-center max-w-7xl mx-auto">
             <!-- Logo -->
-            <div class="text-[32px] font-extrabold font-Changa text-darkblue">
-                STRUCTURA.
-            </div>
+            <a href="{{ route('landingpage')}}">
+                <div class="text-[32px] font-extrabold font-Changa text-darkblue">
+                    STRUCTURA.
+                </div>
+            </a>
 
             <!-- Menu -->
             <div class="hidden md:flex space-x-8 text-darkblue font-medium">
@@ -56,11 +58,13 @@
                     <img src="{{ asset('images/icons/Vector.png') }}" alt="Cart Icon" class="w-5 h-5">
                 </button>
 
-                <!-- User Icon -->
-                <button class="hover:text-gray-600">
+                <a href="{{ route('login') }}" class="hover:text-gray-600 inline-flex items-center">
                     <img src="{{ asset('images/icons/User Profile.png') }}" alt="User Icon" class="w-6 h-6">
-                </button>
+                </a>
             </div>
+
+
         </div>
-    </nav>
+</div>
+</nav>
 </div>
