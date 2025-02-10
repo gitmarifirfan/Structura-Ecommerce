@@ -17,7 +17,7 @@
                 <img src="{{ asset('images/icons/Youtube.png') }}" alt="Video Icon" class="w-5 h-5">
             </a>
             <a href="#" class="hover:opacity-75">
-                <img src="{{ asset('images/icons/Facebook.png') }}" alt="Book Icon" class="w-5 h-5">
+                <img src="{{ asset('images/icons/fb.png') }}" alt="Book Icon" class="w-5 h-5">
             </a>
         </div>
     </div>
