@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\auth;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -72,57 +72,27 @@ class AuthController extends Controller
         // Buat token untuk user
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return redirect()->route('home')->with('success', 'Login berhasil!')->with('token', $token);
+        return redirect()->route('dashboard')->with('success', 'Login berhasil!')->with('token', $token);
     }
 
     // LOGOUT
+    // public function logout(Request $request)
+    // {
+    //     $request->user()->currentAccessToken()->delete();
+    //     return redirect()->route('login')->with('success', 'logout berhasil!');
+    //     // return response()->json([
+    //     //     'message' => 'Logout berhasil'
+    //     // ], 200);
+    // }
+
     public function logout(Request $request)
-    {
-        $request->user()->currentAccessToken()->delete();
+{
+    Auth::logout(); // Logout user dari session
 
-        return response()->json([
-            'message' => 'Logout berhasil'
-        ], 200);
-    }
+    // Hapus sesi agar tidak tersimpan di cache browser
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
 
-    // GET PROFILE
-    public function profile(Request $request)
-    {
-
-        if (!$request->user()) {
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
-        }
-
-        return response()->json([
-            'message' => 'Profile retrieved successfully',
-            'user' => $request->user()
-        ], 200);
-    }
-
-    // UPDATE PROFILE
-    public function updateProfile(Request $request)
-    {
-        $request->validate([
-            'username' => 'sometimes|string|max:255|unique:users,username,' . $request->user()->id,
-            'address' => 'sometimes|string|max:255'
-        ]);
-
-        $user = $request->user();
-
-        if ($request->filled('username')) {
-            $user->username = $request->username;
-        }
-        if ($request->filled('address')) {
-            $user->address = $request->address;
-        }
-
-        $user->save();
-
-        return response()->json([
-            'message' => 'Profile updated successfully',
-            'user' => $user
-        ], 200);
-    }
+    return redirect()->route('login')->with('success', 'Logout berhasil!');
+}
 }

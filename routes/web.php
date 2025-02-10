@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\auth\AuthController;
-use App\Http\Controllers\auth\PasswordResetController;
-use App\Http\Controllers\auth\VerificationController;
-
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\Auth\VerificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,11 +20,17 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('/dashboard', function () {
+    return view('clients.dashbord');
+})->name('dashboard');
+
 // Auth Routes
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Email Verification
@@ -36,3 +41,6 @@ Route::get('/forgot-password', [PasswordResetController::class, 'showForgotPassw
 Route::post('/forgot-password', [PasswordResetController::class, 'sendResetPasswordEmail'])->name('password.email');
 Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])->name('password.update');
+
+
+
