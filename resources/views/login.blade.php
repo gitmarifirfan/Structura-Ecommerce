@@ -99,8 +99,6 @@
             </div>
         </div>
     </section>
-
-    <script src="navbar.js"></script>
 </body>
 
 </html>
