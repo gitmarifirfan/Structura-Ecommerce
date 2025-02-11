@@ -11,31 +11,23 @@
         <!-- Navbar -->
         <nav class="bg-blue-600 text-white p-4 flex justify-between">
             <h1 class="text-lg font-bold">Dashboard</h1>
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="bg-red-500 px-4 py-2 rounded hover:bg-red-600">
-                    Logout
-                </button>
-            </form>
-
+            <div>
+                <a href="{{ route('profile') }}" class="bg-green-500 px-4 py-2 rounded hover:bg-green-600">
+                    Profil Saya
+                </a>
+                <form action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="bg-red-500 px-4 py-2 rounded hover:bg-red-600">
+                        Logout
+                    </button>
+                </form>
+            </div>
         </nav>
 
         <!-- Konten Dashboard -->
         <div class="container mx-auto p-6">
-            <h2 class="text-2xl font-bold">Selamat Datang🎉</h2>
-            <p class="text-gray-700 mt-2">Ini adalah halaman dashboard setelah login.</p>
-
-            <!-- Menu Navigasi -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-                <a href="#" class="bg-white shadow p-4 rounded-lg hover:shadow-lg">
-                    <h3 class="text-xl font-semibold">Laporan</h3>
-                    <p class="text-gray-600">Lihat laporan harian Anda.</p>
-                </a>
-                <a href="#" class="bg-white shadow p-4 rounded-lg hover:shadow-lg">
-                    <h3 class="text-xl font-semibold">Pengaturan</h3>
-                    <p class="text-gray-600">Sesuaikan pengaturan akun.</p>
-                </a>
-            </div>
+            <h2 class="text-2xl font-bold">Selamat Datang, {{ Auth::user()->name }} 🎉</h2>
+            <p class="text-gray-700 mt-2">Ini adalah halaman dashboard.</p>
         </div>
     </div>
 </body>
