@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +21,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/dashboard', function () {
-    return view('clients.dashbord');
-})->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('clients.dashbord');
+// })->name('dashboard');
 
 // Auth Routes
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
@@ -42,5 +43,16 @@ Route::post('/forgot-password', [PasswordResetController::class, 'sendResetPassw
 Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])->name('password.update');
 
+// Middleware auth
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('clients.dashbord');
+    })->name('dashboard');
 
+    // Profil
+    Route::get('/dashboard/profile', [ProfileController::class, 'profile'])->name('profile');
+    Route::put('/dashboard/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 
+    // Logout
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
