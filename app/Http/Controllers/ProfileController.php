@@ -3,28 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function profile(Request $request) {
-        return response()->json([
-            'message' => 'Profile retrieved successfully',
-            'user' => $request->user()
-        ], 200);
+    public function profile()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu!');
+        }
+
+        $user = Auth::user();
+        return view('clients.profile', compact('user'));
     }
 
-    public function updateProfile(Request $request) {
+    public function updateProfile(Request $request)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
         $request->validate([
-            'username' => 'sometimes|string|max:255|unique:users,username,' . $request->user()->id,
-            'address' => 'sometimes|string|max:255'
+            'name' => 'required|string|max:255',
+            'address' => 'nullable|string|max:255',
         ]);
 
-        $user = $request->user();
-        $user->update($request->only('username', 'address'));
+        $user->update([
+            'name' => $request->name,
+            'address' => $request->address,
+        ]);
 
-        return response()->json([
-            'message' => 'Profile updated successfully',
-            'user' => $user
-        ], 200);
+        return redirect()->route('profile')->with('success', 'Profile berhasil diperbarui!');
     }
 }
