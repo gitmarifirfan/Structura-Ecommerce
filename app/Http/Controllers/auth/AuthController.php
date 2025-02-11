@@ -44,55 +44,44 @@ class AuthController extends Controller
         return redirect()->route('login.form')->with('success', 'Silahkan cek email untuk verifikasi.');
     }
 
+
     // LOGIN
     public function login(Request $request)
     {
-        // Validasi input
         $credentials = $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string'
         ]);
 
-        // Cek apakah email ada di database
-        $user = User::where('email', $credentials['email'])->first();
+        // Coba autentikasi user
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
 
-        if (!$user || !Hash::check($credentials['password'], $user->password)) {
-            return response()->json([
-                'message' => 'Email atau password salah'
-            ], 401);
+            // Cek apakah email sudah diverifikasi
+            if (is_null($user->email_verified_at)) {
+                Auth::logout(); // Logout jika belum verifikasi
+                return back()->with('error', 'Silakan verifikasi email Anda terlebih dahulu sebelum login');
+            }
+
+            // Regenerasi sesi setelah login
+            $request->session()->regenerate();
+
+            return redirect()->route('dashboard')->with('success', 'Login berhasil!');
         }
 
-        // Cek apakah email sudah diverifikasi
-        if (is_null($user->email_verified_at)) {
-            return response()->json([
-                'message' => 'Silakan verifikasi email Anda terlebih dahulu sebelum login'
-            ], 403);
-        }
-
-        // Buat token untuk user
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return redirect()->route('dashboard')->with('success', 'Login berhasil!')->with('token', $token);
+        // Jika gagal login
+        return back()->with('error', 'Email atau password salah');
     }
 
     // LOGOUT
-    // public function logout(Request $request)
-    // {
-    //     $request->user()->currentAccessToken()->delete();
-    //     return redirect()->route('login')->with('success', 'logout berhasil!');
-    //     // return response()->json([
-    //     //     'message' => 'Logout berhasil'
-    //     // ], 200);
-    // }
-
     public function logout(Request $request)
-{
-    Auth::logout(); // Logout user dari session
+    {
+        if (Auth::check()) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        }
 
-    // Hapus sesi agar tidak tersimpan di cache browser
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-
-    return redirect()->route('login')->with('success', 'Logout berhasil!');
-}
+        return redirect()->route('login')->with('success', 'Logout berhasil!');
+    }
 }
