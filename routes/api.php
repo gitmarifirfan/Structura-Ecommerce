@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +20,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/auth/register', [AuthController::class, 'register']);
-Route::post('/auth/login', [AuthController::class, 'login']);
 
+
+// REGISTER DAN LOGIN
+Route::post('/register', [ApiController::class, 'register']);
+Route::post('/login', [ApiController::class, 'login']);
+
+// ROUTE YANG BUTUH LOGIN (PAKAI TOKEN)
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/auth/logout', [AuthController::class, 'logout']);
-    Route::get('/auth/profile', [AuthController::class, 'profile']);
-    Route::put('/auth/profile', [AuthController::class, 'updateProfile']);
+    Route::get('/profile', [ApiController::class, 'profile']);
+    Route::put('/profile', [ApiController::class, 'updateProfile']);
+    Route::post('/logout', [ApiController::class, 'logout']);
 });
+
