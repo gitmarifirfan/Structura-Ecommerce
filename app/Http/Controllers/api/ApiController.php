@@ -32,7 +32,6 @@ class ApiController extends Controller
                 'message' => 'Registrasi berhasil! Silakan login.',
                 'user' => $user
             ], 201);
-
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Terjadi kesalahan saat registrasi!',
@@ -66,7 +65,6 @@ class ApiController extends Controller
                 'token' => $token,
                 'user' => $user
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Terjadi kesalahan saat login!',
@@ -76,6 +74,27 @@ class ApiController extends Controller
     }
 
     // GET PROFILE
+    // public function profile(Request $request)
+    // {
+    //     try {
+    //         if (!$request->user()) {
+    //             return response()->json([
+    //                 'message' => 'Token tidak valid atau sudah expired'
+    //             ], 401);
+    //         }
+
+    //         return response()->json([
+    //             'message' => 'Profil user berhasil diambil!',
+    //             'user' => $request->user()
+    //         ]);
+
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'message' => 'Terjadi kesalahan saat mengambil profil!',
+    //             'error' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
     public function profile(Request $request)
     {
         try {
@@ -87,9 +106,13 @@ class ApiController extends Controller
 
             return response()->json([
                 'message' => 'Profil user berhasil diambil!',
-                'user' => $request->user()
+                'user' => [
+                    'id' => $request->user()->id,
+                    'name' => $request->user()->name,
+                    'email' => $request->user()->email,
+                    'address' => json_decode($request->user()->address, true) // Decode JSON
+                ]
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Terjadi kesalahan saat mengambil profil!',
@@ -98,7 +121,41 @@ class ApiController extends Controller
         }
     }
 
+
     // UPDATE PROFILE
+    // public function updateProfile(Request $request)
+    // {
+    //     try {
+    //         $user = $request->user();
+
+    //         if (!$user) {
+    //             return response()->json([
+    //                 'message' => 'Token tidak valid atau sudah expired'
+    //             ], 401);
+    //         }
+
+    //         $request->validate([
+    //             'name' => 'sometimes|string|max:255',
+    //             'address' => 'sometimes|string|max:255'
+    //         ]);
+
+    //         $user->update([
+    //             'name' => $request->name ?? $user->name,
+    //             'address' => $request->address ?? $user->address
+    //         ]);
+
+    //         return response()->json([
+    //             'message' => 'Profil berhasil diperbarui!',
+    //             'user' => $user
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'message' => 'Terjadi kesalahan saat memperbarui profil!',
+    //             'error' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
+
     public function updateProfile(Request $request)
     {
         try {
@@ -112,19 +169,32 @@ class ApiController extends Controller
 
             $request->validate([
                 'name' => 'sometimes|string|max:255',
-                'address' => 'sometimes|string|max:255'
+                'address' => 'sometimes|array', // Pastikan address berbentuk array
+
+                'address.nama_penerima' => 'required|string|max:255',
+                'address.no_telepon' => 'required|string|max:15',
+                'address.provinsi' => 'sometimes|string|max:255',
+                'address.kota_kabupaten' => 'sometimes|string|max:255',
+                'address.kecamatan' => 'sometimes|string|max:255',
+                'address.kode_pos' => 'sometimes|string|max:10',
+                'address.alamat_lengkap' => 'sometimes|string|max:500'
             ]);
 
+            // Simpan data dalam format JSON
             $user->update([
                 'name' => $request->name ?? $user->name,
-                'address' => $request->address ?? $user->address
+                'address' => $request->has('address') ? json_encode($request->address) : $user->address
             ]);
 
             return response()->json([
                 'message' => 'Profil berhasil diperbarui!',
-                'user' => $user
+                'user' => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'address' => json_decode($user->address, true)
+                ]
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Terjadi kesalahan saat memperbarui profil!',
@@ -132,6 +202,7 @@ class ApiController extends Controller
             ], 500);
         }
     }
+
 
     // LOGOUT
     public function logout(Request $request)
@@ -151,7 +222,6 @@ class ApiController extends Controller
             return response()->json([
                 'message' => 'Logout berhasil! Token dihapus.'
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Terjadi kesalahan saat logout!',
