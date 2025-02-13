@@ -24,7 +24,7 @@
                     <!-- Content -->
                     <tr>
                         <td style="color: #4b5563; font-size: 16px; padding: 0 20px;">
-                            <p>Halo</p>
+                            <p>Halo <strong>{{ $user->name }}</p>
                             <p>Kami menerima permintaan untuk mereset password Anda.</p>
                             <p>Klik tombol di bawah ini untuk melanjutkan.</p>
                         </td>

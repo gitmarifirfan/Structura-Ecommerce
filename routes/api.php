@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\api\ApiResetPasswordMail;
 use App\Http\Controllers\api\ApiVerificationMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,10 @@ Route::post('auth/login', [ApiController::class, 'login']);
 // Email Verification
 Route::get('/email/verify/{id}/{hash}', [ApiVerificationMail::class, 'verifyEmail'])
     ->name('verification.verify.api');
+
+// Email Reset Password
+Route::post('auth/forgot-password', [ApiResetPasswordMail::class, 'forgotPassword']);
+Route::post('auth/reset-password', [ApiResetPasswordMail::class, 'resetPassword'])->name('password.reset.api');
 
 // ROUTE YANG BUTUH LOGIN (PAKAI TOKEN)
 Route::middleware('auth:sanctum')->group(function () {
