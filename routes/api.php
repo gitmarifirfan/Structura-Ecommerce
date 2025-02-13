@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\api\ApiVerificationMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,16 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
-
-
 // REGISTER DAN LOGIN
 Route::post('auth/register', [ApiController::class, 'register']);
 Route::post('auth/login', [ApiController::class, 'login']);
+
+// Email Verification
+Route::get('/email/verify/{id}/{hash}', [ApiVerificationMail::class, 'verifyEmail'])
+    ->name('verification.verify.api');
 
 // ROUTE YANG BUTUH LOGIN (PAKAI TOKEN)
 Route::middleware('auth:sanctum')->group(function () {

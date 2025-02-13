@@ -34,9 +34,7 @@ class VerificationMail extends Mailable
     {
         return new Envelope(
             // use domain email from database
-
             from: new Address(config('mail.from.address'), config('mail.from.name')),
-            // from: new Address('no-reply@demomailtrap.com', 'Structura'),
             subject: 'Email Verification - Structura',
         );
     }
