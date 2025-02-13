@@ -23,13 +23,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // REGISTER DAN LOGIN
-Route::post('/register', [ApiController::class, 'register']);
-Route::post('/login', [ApiController::class, 'login']);
+Route::post('auth/register', [ApiController::class, 'register']);
+Route::post('auth/login', [ApiController::class, 'login']);
 
 // ROUTE YANG BUTUH LOGIN (PAKAI TOKEN)
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/profile', [ApiController::class, 'profile']);
-    Route::put('/profile', [ApiController::class, 'updateProfile']);
-    Route::post('/logout', [ApiController::class, 'logout']);
+    Route::get('auth/profile', [ApiController::class, 'profile']);
+    Route::put('auth/profile', [ApiController::class, 'updateProfile']);
+    Route::post('auth/logout', [ApiController::class, 'logout']);
 });
 

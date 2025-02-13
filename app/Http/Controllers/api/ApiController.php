@@ -8,94 +8,155 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class ApiController extends Controller
 {
     // REGISTER
     public function register(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-        return response()->json([
-            'message' => 'Registrasi berhasil! Silakan login.',
-            'user' => $user
-        ], 201);
+            return response()->json([
+                'message' => 'Registrasi berhasil! Silakan login.',
+                'user' => $user
+            ], 201);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan saat registrasi!',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     // LOGIN
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string'
-        ]);
+        try {
+            $credentials = $request->validate([
+                'email' => 'required|string|email',
+                'password' => 'required|string'
+            ]);
 
-        if (!Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Email atau password salah'], 401);
+            if (!Auth::attempt($credentials)) {
+                return response()->json(['message' => 'Email atau password salah'], 401);
+            }
+
+            $user = User::where('email', $credentials['email'])->first();
+
+            // Cek apakah user sudah logout sebelumnya dan token lama masih aktif
+            $user->tokens()->delete(); // Hapus semua token lama sebelum membuat token baru
+
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            return response()->json([
+                'message' => 'Login berhasil!',
+                'token' => $token,
+                'user' => $user
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan saat login!',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-
-        $user = User::where('email', $credentials['email'])->first();
-
-        // $token = $user->createToken('auth_token')->plainTextToken;
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json([
-            'message' => 'Login berhasil!',
-            'token' => $token,
-            'user' => $user
-        ]);
     }
 
     // GET PROFILE
     public function profile(Request $request)
     {
-        return response()->json([
-            'message' => 'Profil user berhasil diambil!',
-            'user' => $request->user()
-        ]);
+        try {
+            if (!$request->user()) {
+                return response()->json([
+                    'message' => 'Token tidak valid atau sudah expired'
+                ], 401);
+            }
+
+            return response()->json([
+                'message' => 'Profil user berhasil diambil!',
+                'user' => $request->user()
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan saat mengambil profil!',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     // UPDATE PROFILE
     public function updateProfile(Request $request)
     {
-        $user = $request->user();
+        try {
+            $user = $request->user();
 
-        $request->validate([
-            'name' => 'sometimes|string|max:255',
-            'email' => 'sometimes|string|email|unique:users,email,' . $user->id,
-            'password' => 'sometimes|string|min:6|confirmed',
-        ]);
+            if (!$user) {
+                return response()->json([
+                    'message' => 'Token tidak valid atau sudah expired'
+                ], 401);
+            }
 
-        $user->update([
-            'name' => $request->name ?? $user->name,
-            'email' => $request->email ?? $user->email,
-            'password' => $request->password ? Hash::make($request->password) : $user->password,
-        ]);
+            $request->validate([
+                'name' => 'sometimes|string|max:255',
+                'address' => 'sometimes|string|max:255'
+            ]);
 
-        return response()->json([
-            'message' => 'Profil berhasil diperbarui!',
-            'user' => $user
-        ]);
+            $user->update([
+                'name' => $request->name ?? $user->name,
+                'address' => $request->address ?? $user->address
+            ]);
+
+            return response()->json([
+                'message' => 'Profil berhasil diperbarui!',
+                'user' => $user
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan saat memperbarui profil!',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     // LOGOUT
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        try {
+            $user = $request->user();
 
-        return response()->json([
-            'message' => 'Logout berhasil!'
-        ]);
+            if (!$user) {
+                return response()->json([
+                    'message' => 'Token tidak valid atau sudah expired'
+                ], 401);
+            }
+
+            // Hapus semua token yang dimiliki user
+            $user->tokens()->delete();
+
+            return response()->json([
+                'message' => 'Logout berhasil! Token dihapus.'
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan saat logout!',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
