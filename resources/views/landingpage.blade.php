@@ -41,7 +41,8 @@
                     terjamin!
                 </p>
                 {{-- Beli Sekarang Button --}}
-                <button class="mt-4 px-10 py-2 bg-darkblue text-white font-semibold rounded-[10px] text-[16px]">
+                <button
+                    class="mt-4 px-10 py-2 bg-darkblue text-white font-semibold rounded-[10px] text-[16px] transition-transform duration-300 ease-in-out transform group-hover:scale-105">
                     Beli Sekarang !
                 </button>
             </div>
@@ -71,21 +72,30 @@
     <div class="mx-auto mb-8 h-[350px] w-full md:w-[1280px] flex items-center justify-center">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4 w-full">
             {{-- card 1 --}}
-            <div class="bg-white p-4 text-left w-[250px] h-[310px] text-darkblue">
-                <img src="{{ asset('images/landingpages/category/paint-colour-tins.jpg') }}" alt="Material Konstruksi"
-                    class="w-[200px] h-[200px] object-cover mx-auto">
-                <h2 class="mt-2 text-[16px] font-semibold ml-2">Cat Tembok</h2>
-                <p class=" ml-2 font-light text-[12px] ">Merk: Nippon Paint</p>
-                <p class=" font-extrabold ml-2 text-[14px]">Rp 250.000</p>
-            </div>
+
+                <div class="bg-white p-4 text-left w-[250px] h-[310px] text-darkblue">
+                    <a href="" class="group w-[200px] h-[200px]">
+                    <div class="w-[200px] h-[200px] mx-auto overflow-hidden">
+                        <img src="{{ asset('images/landingpages/category/paint-colour-tins.jpg') }}"
+                            alt="Material Konstruksi" class="w-full h-full object-cover transition-transform duration-300 ease-in-out transform group-hover:scale-110">
+                    </div>
+                    <h2 class="mt-2 text-[16px] font-semibold ml-2">Cat Tembok</h2>
+                    <p class="ml-2 font-light text-[12px]">Merk: Nippon Paint</p>
+                    <p class="font-extrabold ml-2 text-[14px]">Rp 250.000</p>
+                    </a>
+                </div>
+
+
             {{-- card 2 --}}
-            <div class="bg-white p-4 text-left w-[250px] h-[310px] text-darkblue">
-                <img src="{{ asset('images/landingpages/category/paint-colour-tins.jpg') }}" alt="Material Konstruksi"
-                    class="w-[200px] h-[200px] object-cover mx-auto">
-                <h2 class="mt-2 text-[16px] font-semibold ml-2">Cat Tembok</h2>
-                <p class=" ml-2 font-light text-[12px] ">Merk: Nippon Paint</p>
-                <p class=" font-extrabold ml-2 text-[14px]">Rp 250.000</p>
-            </div>
+            <a href="" class="w-[200px] h-[200px]">
+                <div class="bg-white p-4 text-left w-[250px] h-[310px] text-darkblue">
+                    <img src="{{ asset('images/landingpages/category/paint-colour-tins.jpg') }}"
+                        alt="Material Konstruksi" class="w-[200px] h-[200px] object-cover mx-auto">
+                    <h2 class="mt-2 text-[16px] font-semibold ml-2">Cat Tembok</h2>
+                    <p class=" ml-2 font-light text-[12px] ">Merk: Nippon Paint</p>
+                    <p class=" font-extrabold ml-2 text-[14px]">Rp 250.000</p>
+                </div>
+            </a>
             {{-- card 3 --}}
             <div class="bg-white p-4 text-left w-[250px] h-[310px] text-darkblue">
                 <img src="{{ asset('images/landingpages/category/paint-colour-tins.jpg') }}" alt="Material Konstruksi"
@@ -119,7 +129,8 @@
             <p class="text-sm md:text-base font-light mt-1">
                 Temukan lebih banyak produk berkualitas untuk proyek konstruksi Anda di sini.
             </p>
-            <button class="mt-4 px-6 py-2 bg-white text-darkblue font-semibold rounded-[10px] text-sm md:text-base w-1/2">
+            <button
+                class="mt-4 px-6 py-2 bg-white text-darkblue font-semibold rounded-[10px] text-sm md:text-base w-1/2">
                 Belanja Sekarang!
             </button>
         </div>
