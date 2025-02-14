@@ -47,4 +47,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Relasi: Satu user punya banyak cart?
+    public function cartProduct()
+    {
+        return $this->hasMany(CartProduct::class);
+    }
 }

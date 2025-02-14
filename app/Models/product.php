@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class product extends Model
+class Product extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
@@ -14,13 +14,19 @@ class product extends Model
         'product_name',
         'description',
         'price',
+        'stok',
         'category_id',
     ];
 
     // Relasi: Produk hanya punya satu Kategori
-    public function categories()
+    public function category()
     {
-        return $this->belongsTo(category::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
+    // Relasi: 1 Produk bisa ada di banyak cart
+    public function cartProducts()
+    {
+        return $this->hasMany(CartProduct::class);
+    }
 }

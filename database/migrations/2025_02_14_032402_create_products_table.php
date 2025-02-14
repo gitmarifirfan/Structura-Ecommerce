@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('description');
             $table->decimal('price');
+            $table->unsignedBigInteger('stok');
             $table->softDeletes();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

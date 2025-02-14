@@ -4,7 +4,6 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\product;
-use App\Models\products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,8 +14,7 @@ class ApiProducts extends Controller
     public function getAllProducts()
     {
         // Ambil semua produk dari database
-        $products = product::with('categories')->get();
-        // $products = Products::all();
+        $products = product::with('category')->get();
 
         // Jika data kosong, kirim response khusus
         if ($products->isEmpty()) {
@@ -41,6 +39,7 @@ class ApiProducts extends Controller
             'product_name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
+            'stok' => 'required|integer|min:0',
             'category_id' => 'required|exists:categories,id'
         ]);
 
@@ -56,7 +55,7 @@ class ApiProducts extends Controller
 
         return response()->json([
             'message' => 'Product created successfully',
-            'data' => $product->load('categories')
+            'data' => $product->load('category')
         ], 201);
     }
 
@@ -64,7 +63,7 @@ class ApiProducts extends Controller
     public function getProductById($id)
     {
         // Cari produk berdasarkan ID
-        $product = product::with('categories')->find($id);
+        $product = product::with('category')->find($id);
 
         // Jika produk tidak ditemukan
         if (!$product) {

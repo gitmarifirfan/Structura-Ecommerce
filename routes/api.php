@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApiAuth;
+use App\Http\Controllers\api\ApiCartProduct;
 use App\Http\Controllers\api\ApiCategory;
 use App\Http\Controllers\api\ApiProducts;
 use App\Http\Controllers\api\ApiResetPasswordMail;
@@ -31,12 +32,17 @@ Route::get('/email/verify/{id}/{hash}', [ApiVerificationMail::class, 'verifyEmai
 Route::post('auth/forgot-password', [ApiResetPasswordMail::class, 'forgotPassword']);
 Route::post('auth/reset-password', [ApiResetPasswordMail::class, 'resetPassword'])->name('password.reset.api');
 
-
 // ROUTE YANG BUTUH LOGIN (PAKAI TOKEN)
 Route::middleware('auth:sanctum')->group(function () {
+    // Profile & Authenticated User Routes
     Route::get('auth/profile', [ApiAuth::class, 'profile']);
     Route::put('auth/profile', [ApiAuth::class, 'updateProfile']);
     Route::post('auth/logout', [ApiAuth::class, 'logout']);
+
+    // Cart Routes
+    Route::get('/cart', [ApiCartProduct::class, 'getUserCart']);
+    Route::put('/cart/{id}', [ApiCartProduct::class, 'updateCartItem']);
+    Route::delete('/cart/{id}', [ApiCartProduct::class, 'deleteCartItem']);
 });
 
 // Product route
@@ -51,3 +57,5 @@ Route::post('/categories', [ApiCategory::class, 'storeCategory']);
 Route::get('/categories/{id}', [ApiCategory::class, 'getCategoryById']);
 
 // Category cart
+
+Route::post('/cart/add', [ApiCartProduct::class, 'addToCart']);
