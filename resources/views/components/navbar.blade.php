@@ -35,9 +35,10 @@
 
             <!-- Menu -->
             <div class="hidden md:flex space-x-8 text-darkblue font-medium">
-                <button class="hover:text-gray-600">Koleksi Baru</button>
-                <button class="hover:text-gray-600">Produk</button>
-                <a href="#" class="hover:text-gray-600">Lokasi Toko</a>
+
+                <a href="{{ route('landingpage') }}" class="hover:text-gray-600">Beranda</a>
+                <a href="{{ route('product') }}" class="hover:text-gray-600">Produk</a>
+                <a href="{{ route('location') }}" class="hover:text-gray-600">Lokasi Toko</a>
             </div>
 
             <!-- Icons -->
