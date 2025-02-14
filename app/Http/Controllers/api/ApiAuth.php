@@ -8,10 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
-use Laravel\Sanctum\PersonalAccessToken;
 
-class ApiController extends Controller
+class ApiAuth extends Controller
 {
     // REGISTER
     public function register(Request $request)

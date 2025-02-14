@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class products extends Model
+class product extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
@@ -17,5 +17,10 @@ class products extends Model
         'category_id',
     ];
 
+    // Relasi: Produk hanya punya satu Kategori
+    public function categories()
+    {
+        return $this->belongsTo(category::class, 'category_id');
+    }
 
 }

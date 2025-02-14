@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Api\ApiAuth;
+use App\Http\Controllers\api\ApiCategory;
+use App\Http\Controllers\api\ApiProducts;
 use App\Http\Controllers\api\ApiResetPasswordMail;
 use App\Http\Controllers\api\ApiVerificationMail;
 use Illuminate\Http\Request;
@@ -18,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 // REGISTER DAN LOGIN
-Route::post('auth/register', [ApiController::class, 'register']);
-Route::post('auth/login', [ApiController::class, 'login']);
+Route::post('auth/register', [ApiAuth::class, 'register']);
+Route::post('auth/login', [ApiAuth::class, 'login']);
 
 // Email Verification
 Route::get('/email/verify/{id}/{hash}', [ApiVerificationMail::class, 'verifyEmail'])
@@ -29,10 +31,23 @@ Route::get('/email/verify/{id}/{hash}', [ApiVerificationMail::class, 'verifyEmai
 Route::post('auth/forgot-password', [ApiResetPasswordMail::class, 'forgotPassword']);
 Route::post('auth/reset-password', [ApiResetPasswordMail::class, 'resetPassword'])->name('password.reset.api');
 
+
 // ROUTE YANG BUTUH LOGIN (PAKAI TOKEN)
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('auth/profile', [ApiController::class, 'profile']);
-    Route::put('auth/profile', [ApiController::class, 'updateProfile']);
-    Route::post('auth/logout', [ApiController::class, 'logout']);
+    Route::get('auth/profile', [ApiAuth::class, 'profile']);
+    Route::put('auth/profile', [ApiAuth::class, 'updateProfile']);
+    Route::post('auth/logout', [ApiAuth::class, 'logout']);
 });
 
+// Product route
+Route::get('/products', [ApiProducts::class, 'getAllProducts']);
+Route::post('/products', [ApiProducts::class, 'storeProduct']);
+Route::get('/products/{id}', [ApiProducts::class, 'getProductById']);
+
+
+// Category route
+Route::get('/categories', [ApiCategory::class, 'getAllCategories']);
+Route::post('/categories', [ApiCategory::class, 'storeCategory']);
+Route::get('/categories/{id}', [ApiCategory::class, 'getCategoryById']);
+
+// Category cart
