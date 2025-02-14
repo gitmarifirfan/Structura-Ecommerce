@@ -24,3 +24,15 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('register');
 })->name('register');
+
+Route::get('/product', function () {
+    return view('product');
+})->name('product');
+
+Route::get('/detailproduct', function () {
+    return view('detailproduct');
+})->name('detailproduct');
+
+Route::get('/location', function () {
+    return view('location');
+})->name('location');
