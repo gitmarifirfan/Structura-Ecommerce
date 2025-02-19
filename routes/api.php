@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ApiAuth;
 use App\Http\Controllers\api\ApiCartProduct;
 use App\Http\Controllers\api\ApiCategory;
+use App\Http\Controllers\api\ApiOrder;
 use App\Http\Controllers\api\ApiProducts;
 use App\Http\Controllers\api\ApiResetPasswordMail;
 use App\Http\Controllers\api\ApiVerificationMail;
@@ -56,6 +57,9 @@ Route::get('/category', [ApiCategory::class, 'getAllCategories']);
 Route::post('/categoy', [ApiCategory::class, 'storeCategory']);
 Route::get('/category/{id}', [ApiCategory::class, 'getCategoryById']);
 
-// Category cart
+// Order route
+Route::get('/order', [ApiOrder::class, 'getUserOrder']);
+Route::get('/order/{id}', [ApiOrder::class, 'getOrderById']);
 
+// Category cart
 Route::post('/cart/add', [ApiCartProduct::class, 'addToCart']);
