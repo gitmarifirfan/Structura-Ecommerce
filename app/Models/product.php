@@ -21,7 +21,7 @@ class Product extends Model
     // Relasi: Produk hanya punya satu Kategori
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id','id');
     }
 
     // Relasi: 1 Produk bisa ada di banyak cart

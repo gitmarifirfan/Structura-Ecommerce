@@ -10,8 +10,6 @@ class PaymentStatus extends Model
 {
     use HasFactory;
 
-    protected $table = 'payment_statuses';
-
     protected $fillable = [
         'user_id',
         'status',
@@ -19,6 +17,6 @@ class PaymentStatus extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id','id');
     }
 }
