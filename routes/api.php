@@ -52,9 +52,9 @@ Route::get('/products/{id}', [ApiProducts::class, 'getProductById']);
 
 
 // Category route
-Route::get('/categories', [ApiCategory::class, 'getAllCategories']);
-Route::post('/categories', [ApiCategory::class, 'storeCategory']);
-Route::get('/categories/{id}', [ApiCategory::class, 'getCategoryById']);
+Route::get('/category', [ApiCategory::class, 'getAllCategories']);
+Route::post('/categoy', [ApiCategory::class, 'storeCategory']);
+Route::get('/category/{id}', [ApiCategory::class, 'getCategoryById']);
 
 // Category cart
 
