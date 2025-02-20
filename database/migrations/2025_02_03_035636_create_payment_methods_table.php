@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment_statuses', function (Blueprint $table) {
+        Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('payment_method_id')->constrained()->cascadeOnDelete();
-            $table->enum('status', ['pending', 'paid', 'failed'])->default('pending');
+            $table->string('name');
+            $table->string('provider');
+            $table->string('code')->unique();
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment_statuses');
+        Schema::dropIfExists('payment_methods');
     }
 };
