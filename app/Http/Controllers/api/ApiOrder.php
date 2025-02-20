@@ -44,7 +44,7 @@ class ApiOrder extends Controller
     }
 
     // ✅ CREATE ORDER
-    public function store(Request $request)
+    public function storeOrder(Request $request)
     {
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',

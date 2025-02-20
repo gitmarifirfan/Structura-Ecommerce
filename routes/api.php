@@ -44,6 +44,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/cart', [ApiCartProduct::class, 'getUserCart']);
     Route::put('/cart/{id}', [ApiCartProduct::class, 'updateCartItem']);
     Route::delete('/cart/{id}', [ApiCartProduct::class, 'deleteCartItem']);
+    Route::post('/cart/add', [ApiCartProduct::class, 'addToCart']);
+
+    // Order route
+    Route::get('/order', [ApiOrder::class, 'getUserOrder']);
+    Route::get('/order/{id}', [ApiOrder::class, 'getOrderById']);
+    Route::post('/order', [ApiOrder::class, 'storeOrder']);
 });
 
 // Product route
@@ -54,12 +60,5 @@ Route::get('/products/{id}', [ApiProducts::class, 'getProductById']);
 
 // Category route
 Route::get('/category', [ApiCategory::class, 'getAllCategories']);
-Route::post('/categoy', [ApiCategory::class, 'storeCategory']);
+Route::post('/category', [ApiCategory::class, 'storeCategory']);
 Route::get('/category/{id}', [ApiCategory::class, 'getCategoryById']);
-
-// Order route
-Route::get('/order', [ApiOrder::class, 'getUserOrder']);
-Route::get('/order/{id}', [ApiOrder::class, 'getOrderById']);
-
-// Category cart
-Route::post('/cart/add', [ApiCartProduct::class, 'addToCart']);
