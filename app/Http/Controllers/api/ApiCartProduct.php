@@ -12,7 +12,7 @@ class ApiCartProduct extends Controller
     // TODO : GET Ambil semua produk dalam cart berdasarkan user_id
     public function getUserCart()
 {
-    $user_id = auth()->id(); // user id token
+    $user_id = auth()->id();
 
     $cartItems = CartProduct::where('user_id', $user_id)->with(['product', 'user'])->get();
 
